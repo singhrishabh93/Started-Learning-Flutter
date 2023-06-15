@@ -6,9 +6,21 @@ void main() {
 
 // void main() => runApp(MyApp()); can also be used when only on class is there
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
+  var questionIndex = 0;
+
   void answerQuestion() {
-    print('Answer Chosen!');
+    questionIndex = questionIndex + 1;
+    print(questionIndex);
+    //print('Answer Chosen!');
   }
 
   @override
@@ -25,18 +37,22 @@ class MyApp extends StatelessWidget {
         )),
         body: Column(
           children: <Widget>[
-            Text('The questions!'),
+            Text(
+              questions[questionIndex],
+            ),
             ElevatedButton(
               child: Text('Answer 1'),
               onPressed: answerQuestion,
             ),
             ElevatedButton(
               child: Text('Answer 2'),
-              onPressed: answerQuestion,
+              onPressed: () => print('Answer 2 Chosen!'),
+              //answerQuestion, // or anonymous function () => print('Answer 2 Chosen!'),
             ),
             ElevatedButton(
               child: Text('Answer 3'),
-              onPressed: answerQuestion,
+              onPressed:
+                  answerQuestion, // for long function (){//... print('Answer 3 Chosen');}
             ),
             ElevatedButton(
               child: Text('Answer 4'),
